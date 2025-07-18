@@ -13,6 +13,9 @@ public class Parameter {
     @JsonProperty("type")
     private final ParameterType type;
 
+    @JsonProperty("parameter_name")
+    private String parameterName;
+
     /**
      * Instantiates a new Parameter.
      *
@@ -29,5 +32,23 @@ public class Parameter {
      */
     public ParameterType getType() {
         return type;
+    }
+
+    /**
+     * Gets parameter name.
+     *
+     * @return the parameter name
+     */
+    public String getParameterName() {
+        return parameterName;
+    }
+
+    /**
+     * Sets parameter name.
+     *
+     * @param parameterName the parameter name
+     */
+    public void setParameterName(String parameterName) {
+        this.parameterName = parameterName;
     }
 }
