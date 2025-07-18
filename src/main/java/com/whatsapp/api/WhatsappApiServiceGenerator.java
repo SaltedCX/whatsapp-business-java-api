@@ -2,9 +2,12 @@ package com.whatsapp.api;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.whatsapp.api.configuration.WhatsappApiConfig;
 import com.whatsapp.api.domain.errors.Error;
 import com.whatsapp.api.domain.errors.WhatsappApiError;
+import com.whatsapp.api.domain.media.FileType;
+import com.whatsapp.api.domain.media.FileTypeDeserializer;
 import com.whatsapp.api.domain.media.MediaFile;
 import com.whatsapp.api.exception.WhatsappApiException;
 import com.whatsapp.api.interceptor.AuthenticationInterceptor;
@@ -31,6 +34,7 @@ public class WhatsappApiServiceGenerator {
     static OkHttpClient sharedClient;
     private static final Converter.Factory converterFactory = JacksonConverterFactory.create(
         new ObjectMapper()
+          .registerModule(new SimpleModule().addDeserializer(FileType.class, new FileTypeDeserializer()))
           .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
           .configure(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES, false)
           .configure(DeserializationFeature.FAIL_ON_UNRESOLVED_OBJECT_IDS, false)
