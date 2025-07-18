@@ -14,10 +14,8 @@
     <packaging>jar</packaging>
 
     <name>whatsapp-business-sdk</name>
-    <url>https://github.com/Bindambc/whatsapp-business-java-sdk</url>
-    <description>Whatsapp business api SDK, written in java. This SDK implements the Official Whatsapp Cloud API and
-        WhatsApp Business Management API.
-    </description>
+    <url>https://github.com/SaltedCX/whatsapp-business-java-api</url>
+    <description>Whatsapp business api SDK, written in java. This SDK implements the Official Whatsapp Cloud API and WhatsApp Business Management API.</description>
 
     <developers>
         <developer>
@@ -42,7 +40,7 @@
         <repository>
             <id>github</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/Bindambc/whatsapp-business-java-api</url>
+            <url>https://maven.pkg.github.com/SaltedCX/whatsapp-business-java-api</url>
         </repository>
     </distributionManagement>
 
