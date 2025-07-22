@@ -1000,7 +1000,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
 
         Assertions.assertEquals("1227829768162607", response.id());
         Assertions.assertEquals(103632L, response.fileSize());
-        Assertions.assertEquals(FileType.PNG, response.mimeType());
+        Assertions.assertEquals("image/png", response.mimeType());
         Assertions.assertEquals("72fd8a734216768565faf2b59cec266eea00a78dd039ce84356319fc8c4ad22e", response.sha256());
         Assertions.assertEquals("https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=1228169767822607&ext=16772107977&hash=ATs5BiSbLTZzCFh73M16stmnUK2UV6NBqChXB4WWC21sw", response.url());
 
@@ -1018,7 +1018,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
 
         Assertions.assertEquals("1227829768162607", response.id());
         Assertions.assertEquals(103635L, response.fileSize());
-        Assertions.assertEquals(FileType.TEXT, response.mimeType());
+        Assertions.assertEquals("video/x-msvideo", response.mimeType());
         Assertions.assertEquals("72fd8a734216768565faf2b59cec266eea00a78dd039ce84356319fc8c4ad22f", response.sha256());
         Assertions.assertEquals("https://lookaside.fbsbx.com/whatsapp_business/attachments/?mid=1228169767822608&ext=16772107977&hash=ATs5BiSbLTZzCFh73M16stmnUK2UV6NBqChXB4WWC21ss", response.url());
 
