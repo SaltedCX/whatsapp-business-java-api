@@ -16,7 +16,7 @@ import java.util.List;
  */
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.EXISTING_PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({@JsonSubTypes.Type(value = ButtonComponent.class, name = "button"), //
         @JsonSubTypes.Type(value = HeaderComponent.class, name = "header"), //
         @JsonSubTypes.Type(value = BodyComponent.class, name = "body")})//
