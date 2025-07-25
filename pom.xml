@@ -4,7 +4,7 @@
 
     <groupId>cx.salted</groupId>
     <artifactId>whatsapp-business-java-api</artifactId>
-    <version>v0.6.4</version>
+    <version>v0.6.5</version>
     <licenses>
         <license>
             <name>The MIT License</name>
