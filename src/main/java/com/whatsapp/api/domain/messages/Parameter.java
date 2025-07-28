@@ -1,6 +1,5 @@
 package com.whatsapp.api.domain.messages;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -12,7 +11,7 @@ import com.whatsapp.api.domain.messages.type.ParameterType;
  */
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = TextParameter.class, name = "text"),
         @JsonSubTypes.Type(value = CurrencyParameter.class, name = "currency"),
