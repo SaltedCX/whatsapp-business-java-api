@@ -1,6 +1,7 @@
 package com.whatsapp.api.domain.messages;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.whatsapp.api.domain.messages.type.ParameterType;
@@ -30,6 +31,7 @@ public class Parameter {
      *
      * @return the type
      */
+    @JsonIgnore
     public ParameterType getType() {
         return type;
     }
