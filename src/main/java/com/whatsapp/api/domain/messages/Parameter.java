@@ -1,15 +1,27 @@
 package com.whatsapp.api.domain.messages;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.whatsapp.api.domain.messages.type.ParameterType;
 
 /**
  * The type Parameter.
  */
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type", visible = true)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = TextParameter.class, name = "text"),
+        @JsonSubTypes.Type(value = CurrencyParameter.class, name = "currency"),
+        @JsonSubTypes.Type(value = DateTimeParameter.class, name = "date_time"),
+        @JsonSubTypes.Type(value = ImageParameter.class, name = "image"),
+        @JsonSubTypes.Type(value = VideoParameter.class, name = "video"),
+        @JsonSubTypes.Type(value = DocumentParameter.class, name = "document"),
+        @JsonSubTypes.Type(value = ButtonPayloadParameter.class, name = "payload")})
+
 public class Parameter {
     @JsonProperty("type")
     private final ParameterType type;
@@ -31,7 +43,6 @@ public class Parameter {
      *
      * @return the type
      */
-    @JsonIgnore
     public ParameterType getType() {
         return type;
     }
