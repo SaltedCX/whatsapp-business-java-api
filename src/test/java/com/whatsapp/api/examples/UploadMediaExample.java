@@ -24,7 +24,7 @@ public class UploadMediaExample {
         byte[] fileContent = Files.readAllBytes(Paths.get("src/test/resources/" + fileName));
 
 
-        var response = whatsappBusinessCloudApi.uploadMedia(PHONE_NUMBER_ID, fileName, FileType.PNG, fileContent);
+        var response = whatsappBusinessCloudApi.uploadMedia(PHONE_NUMBER_ID, fileName, "image/png", fileContent);
 
         System.out.println(response);
     }
