@@ -77,14 +77,14 @@ public class WhatsappBusinessCloudApi {
      *
      * @param phoneNumberId Business phone number ID. If included, the operation will only be processed if the ID matches the ID of the business phone number that the media was uploaded on.
      * @param fileName      file name. Ex: photo1.jpg
-     * @param fileType      the file type. See {@link FileType}
+     * @param mimeType      MIME type - a standard identifier that specifies the format
      * @param file          byte[] - file content
      * @return {@link UploadResponse}
      * @see <a href="https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media">official documentation</a>
      */
-    public UploadResponse uploadMedia(String phoneNumberId, String fileName, FileType fileType, byte[] file) {
+    public UploadResponse uploadMedia(String phoneNumberId, String fileName, String mimeType, byte[] file) {
 
-        var requestFile = MultipartBody.create(file, MediaType.parse(fileType.getType()));
+        var requestFile = MultipartBody.create(file, MediaType.get(mimeType));
         Part body = Part.createFormData("file", fileName, requestFile);
 
         var messageProduct = Part.createFormData("messaging_product", "whatsapp");

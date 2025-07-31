@@ -979,7 +979,7 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
         var fileContent = bytesFromResource("/starwars.png");
 
 
-        var response = whatsappBusinessCloudApi.uploadMedia(PHONE_NUMBER_ID, "starwars.png", FileType.PNG, fileContent);
+        var response = whatsappBusinessCloudApi.uploadMedia(PHONE_NUMBER_ID, "starwars.png", "image/png", fileContent);
 
         RecordedRequest recordedRequest = mockWebServer.takeRequest();
         Assertions.assertEquals("POST", recordedRequest.getMethod());
