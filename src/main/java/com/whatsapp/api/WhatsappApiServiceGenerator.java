@@ -28,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class WhatsappApiServiceGenerator {
 
-    static OkHttpClient sharedClient;
+    public static OkHttpClient sharedClient;
     private static final Converter.Factory converterFactory = JacksonConverterFactory.create(
         new ObjectMapper()
           .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
