@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.skyscreamer.jsonassert.JSONCompareMode;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -987,6 +988,23 @@ class WhatsappBusinessCloudApiTest extends MockServerUtilsTest {
         Assertions.assertEquals(103923, recordedRequest.getBodySize());
         Assertions.assertEquals("985569392615996", response.id());
     }
+
+    @Test
+    void testUploadMedia2() throws IOException, URISyntaxException, InterruptedException {
+        mockWebServer.enqueue(new MockResponse().newBuilder().code(200).body(fromResource("/uploadResponse.json")).build());
+
+        var file = fileFromResource("/starwars.png");
+
+
+        var response = whatsappBusinessCloudApi.uploadMedia(PHONE_NUMBER_ID, "starwars.png", "image/png", new FileInputStream(file));
+
+        RecordedRequest recordedRequest = mockWebServer.takeRequest();
+        Assertions.assertEquals("POST", recordedRequest.getMethod());
+        Assertions.assertEquals("/" + API_VERSION + "/" + PHONE_NUMBER_ID + "/media", recordedRequest.getPath());
+        Assertions.assertEquals(103923, recordedRequest.getBodySize());
+        Assertions.assertEquals("985569392615996", response.id());
+    }
+
 
     @Test
     void testRetrieveMediaUrl() throws IOException, URISyntaxException, InterruptedException {

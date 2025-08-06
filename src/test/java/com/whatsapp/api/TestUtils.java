@@ -1,5 +1,6 @@
 package com.whatsapp.api;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
@@ -20,6 +21,10 @@ public class TestUtils {
         return new String(encoded, StandardCharsets.UTF_8);
 
 
+    }
+
+    public File fileFromResource(String fileName) throws URISyntaxException {
+        return Paths.get(Objects.requireNonNull(this.getClass().getResource(fileName)).toURI()).toFile();
     }
 
     /**

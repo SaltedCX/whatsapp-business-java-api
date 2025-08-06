@@ -1,5 +1,6 @@
 package com.whatsapp.api.impl;
 
+import com.whatsapp.api.WhatsappApiServiceGenerator;
 import com.whatsapp.api.configuration.ApiVersion;
 import com.whatsapp.api.domain.media.FileType;
 import com.whatsapp.api.domain.media.Media;
@@ -14,6 +15,11 @@ import com.whatsapp.api.service.WhatsappBusinessCloudApiService;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.MultipartBody.Part;
+import okhttp3.RequestBody;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static com.whatsapp.api.WhatsappApiServiceGenerator.*;
 import static com.whatsapp.api.configuration.WhatsappApiConfig.getApiVersion;
@@ -88,6 +94,49 @@ public class WhatsappBusinessCloudApi {
         Part body = Part.createFormData("file", fileName, requestFile);
 
         var messageProduct = Part.createFormData("messaging_product", "whatsapp");
+
+        return executeSync(whatsappBusinessCloudApiService.uploadMedia(apiVersion.getValue(), phoneNumberId, body, messageProduct));
+    }
+
+    /**
+     * You can use the endpoint to upload media:
+     * All media files sent through this endpoint are encrypted and persist for 30 days, unless they are deleted earlier
+     * <p>The maximum supported file size for media messages on Cloud API is 100MB. In the event the customer sends a file that is greater than 100MB, you will receive a webhook with error code 131052 and title:
+     * "Media file size too big. Max file size we currently support: 100MB. Please communicate with your customer to send a media file that is smaller than 100MB"_.
+     * We advise that you send customers a warning message that their media file exceeds the maximum file size when this webhook event is triggered.</p>
+     *
+     * @param phoneNumberId Business phone number ID. If included, the operation will only be processed if the ID matches the ID of the business phone number that the media was uploaded on.
+     * @param fileName      file name. Ex: photo1.jpg
+     * @param mimeType      MIME type - a standard identifier that specifies the format
+     * @param inputStream    InputStream - InputStream with content
+     * @return {@link UploadResponse}
+     * @see <a href="https://developers.facebook.com/docs/whatsapp/cloud-api/reference/media">official documentation</a>
+     */
+    public UploadResponse uploadMedia(String phoneNumberId, String fileName, String mimeType, InputStream inputStream) {
+        var requestBody = new RequestBody() {
+            @Override
+            public MediaType contentType() {
+                return MediaType.get(mimeType);
+            }
+
+            @Override
+            public long contentLength() {
+                return -1;
+            }
+
+            @Override
+            public void writeTo(okio.BufferedSink sink) throws IOException {
+                try (InputStream source = inputStream) {
+                    byte[] buffer = new byte[8192];
+                    int read;
+                    while ((read = source.read(buffer)) != -1) {
+                        sink.write(buffer, 0, read);
+                    }
+                }
+            }
+        };
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", fileName, requestBody);
+        var messageProduct = MultipartBody.Part.createFormData("messaging_product", "whatsapp");
 
         return executeSync(whatsappBusinessCloudApiService.uploadMedia(apiVersion.getValue(), phoneNumberId, body, messageProduct));
     }
